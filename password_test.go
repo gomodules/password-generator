@@ -60,6 +60,13 @@ func TestGenerateForCharset2(t *testing.T) {
 				chset: Uppercase | Lowercase | Symbols,
 			},
 		},
+		{
+			name: "Uppercase | Lowercase | SimpleSymbols",
+			args: args{
+				n:     8,
+				chset: Uppercase | Lowercase | SimpleSymbols,
+			},
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -93,6 +100,11 @@ func uses_charset(str string, chset Charset) bool {
 		}
 		if chset&Symbols != 0 {
 			if contains(symbols, data[i]) {
+				continue
+			}
+		}
+		if chset&SimpleSymbols != 0 {
+			if contains(simple_symbols, data[i]) {
 				continue
 			}
 		}
