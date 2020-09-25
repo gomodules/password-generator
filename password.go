@@ -29,7 +29,7 @@ var (
 )
 
 func Generate(n int) string {
-	return GenerateForCharset(n, Uppercase|Lowercase|Numbers|Symbols)
+	return GenerateForCharset(n, Uppercase|Lowercase|Numbers|SimpleSymbols)
 }
 
 func GenerateForCharset(n int, chset Charset) string {
