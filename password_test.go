@@ -54,10 +54,17 @@ func TestGenerateForCharset2(t *testing.T) {
 			},
 		},
 		{
-			name: "Uppercase | Lowercase | Symbols",
+			name: "Uppercase | Lowercase | Unreserved",
 			args: args{
 				n:     8,
-				chset: Uppercase | Lowercase | Symbols,
+				chset: Uppercase | Lowercase | Unreserved,
+			},
+		},
+		{
+			name: "Uppercase | Lowercase | Reserved",
+			args: args{
+				n:     8,
+				chset: Uppercase | Lowercase | Reserved,
 			},
 		},
 		{
@@ -65,6 +72,13 @@ func TestGenerateForCharset2(t *testing.T) {
 			args: args{
 				n:     8,
 				chset: Uppercase | Lowercase | SimpleSymbols,
+			},
+		},
+		{
+			name: "Uppercase | Lowercase | Symbols",
+			args: args{
+				n:     8,
+				chset: Uppercase | Lowercase | Symbols,
 			},
 		},
 	}
@@ -98,13 +112,23 @@ func uses_charset(str string, chset Charset) bool {
 				continue
 			}
 		}
-		if chset&Symbols != 0 {
-			if contains(symbols, data[i]) {
+		if chset&Unreserved != 0 {
+			if contains(unreserved, data[i]) {
+				continue
+			}
+		}
+		if chset&Reserved != 0 {
+			if contains(reserved, data[i]) {
 				continue
 			}
 		}
 		if chset&SimpleSymbols != 0 {
 			if contains(simple_symbols, data[i]) {
+				continue
+			}
+		}
+		if chset&Symbols != 0 {
+			if contains(symbols, data[i]) {
 				continue
 			}
 		}
