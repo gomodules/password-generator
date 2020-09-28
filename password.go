@@ -37,10 +37,10 @@ var (
 )
 
 func Generate(n int) string {
-	if n == 1 {
-		return GenerateForCharset(n, Default)
+	if n <= 2 {
+		return GenerateForCharset(n, AlphaNum)
 	}
-	return GenerateForCharset(1, AlphaNum) + GenerateForCharset(n-1, Default)
+	return GenerateForCharset(1, AlphaNum) + GenerateForCharset(n-2, Default) + GenerateForCharset(1, AlphaNum)
 }
 
 func GenerateForCharset(n int, chset Charset) string {
