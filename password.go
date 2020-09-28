@@ -15,6 +15,7 @@ const (
 	Reserved                          // 1 << 4 which is 00010000
 	SimpleSymbols                     // 1 << 5 which is 00100000
 	Symbols                           // 1 << 6 which is 01000000
+	AlphaNum      = Uppercase | Lowercase | Numbers
 	Default       = Uppercase | Lowercase | Numbers | SimpleSymbols
 )
 
@@ -36,7 +37,10 @@ var (
 )
 
 func Generate(n int) string {
-	return GenerateForCharset(n, Default)
+	if n == 1 {
+		return GenerateForCharset(n, Default)
+	}
+	return GenerateForCharset(1, AlphaNum) + GenerateForCharset(n-1, Default)
 }
 
 func GenerateForCharset(n int, chset Charset) string {
